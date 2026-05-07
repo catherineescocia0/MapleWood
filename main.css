@@ -1,0 +1,145 @@
+/* ═══════════════════════════════════════
+   css/main.css
+   Layout · HUD · Loading · Notifications
+   ═══════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
+
+:root {
+  --gold:        #f0c060;
+  --cream:       #f5e6c8;
+  --teal:        #5ba8a0;
+  --panel-bg:    #10101e;
+  --dark-bg:     #0d0d1a;
+  --hud-bg:      #1a1a2e;
+  --border-dim:  #2a2a3e;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Body ── */
+body {
+  background: var(--dark-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Press Start 2P', monospace;
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* ── Animations ── */
+@keyframes blink  { 0%,100%{opacity:1} 50%{opacity:.3} }
+@keyframes pulse  { 0%,100%{text-shadow:0 0 20px rgba(240,192,96,.5)} 50%{text-shadow:0 0 40px rgba(240,192,96,1)} }
+@keyframes slideIn  { from{transform:translateX(102%)} to{transform:translateX(0)} }
+@keyframes slideOut { from{transform:translateX(0)}    to{transform:translateX(102%)} }
+@keyframes fadeIn   { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── Game Wrapper ── */
+#game-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── HUD ── */
+#hud {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--hud-bg);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  font-size: 7px;
+  letter-spacing: 1px;
+}
+#hud .location   { color: var(--cream); }
+#hud-right       { display: flex; gap: 12px; align-items: center; }
+.hud-hint        { color: #888; font-size: 6px; animation: blink 2s infinite; }
+
+#editor-btn {
+  background: var(--hud-bg);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background .2s;
+}
+#editor-btn:hover { background: var(--border-dim); }
+
+/* ── Canvas container ── */
+#canvas-container {
+  position: relative;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 40px rgba(240,192,96,.3), 0 0 80px rgba(240,192,96,.1);
+}
+
+canvas { display: block; }
+
+/* ── Desktop controls bar ── */
+#controls {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 12px;
+  background: var(--dark-bg);
+  color: #555;
+  font-size: 6px;
+}
+.key {
+  display: inline-block;
+  background: var(--hud-bg);
+  border: 1px solid #444;
+  padding: 2px 5px;
+  color: #888;
+  font-size: 5px;
+  margin: 0 2px;
+}
+
+/* ── Loading Screen ── */
+#loading {
+  position: fixed; inset: 0;
+  background: var(--dark-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 200;
+}
+#loading h1  { font-size: 22px; color: var(--gold); animation: pulse 2s infinite; }
+#loading p   { font-size: 8px; color: #888; }
+#loading-bar { width: 300px; height: 12px; border: 2px solid var(--gold); background: var(--dark-bg); overflow: hidden; }
+#loading-fill { height: 100%; background: var(--gold); width: 0%; transition: width .1s; }
+
+/* ── Notification toast ── */
+#notif {
+  position: absolute;
+  top: 10px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(26,26,46,.95);
+  border: 2px solid var(--teal);
+  color: var(--teal);
+  padding: 6px 12px;
+  font-size: 7px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 25;
+  transition: opacity .3s;
+  white-space: nowrap;
+}
+#notif.show { opacity: 1; }

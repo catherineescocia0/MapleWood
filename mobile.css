@@ -1,0 +1,139 @@
+/* ═══════════════════════════════════════
+   css/mobile.css
+   Touch controls · Responsive scaling
+   ═══════════════════════════════════════ */
+
+/* ── Mobile D-Pad + Action Buttons ── */
+#mobile-controls {
+  display: none;               /* shown via media query */
+  width: 100%;
+  max-width: 800px;
+  padding: 10px 16px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--dark-bg);
+}
+
+/* D-Pad grid */
+#dpad {
+  display: grid;
+  grid-template-columns: 44px 44px 44px;
+  grid-template-rows:    44px 44px;
+  gap: 3px;
+}
+#btn-up    { grid-column: 2; grid-row: 1; }
+#btn-left  { grid-column: 1; grid-row: 2; }
+#btn-right { grid-column: 3; grid-row: 2; }
+#btn-down  { grid-column: 2; grid-row: 2; }
+
+.dpad-btn {
+  width: 44px; height: 44px;
+  background: #1a1a2e;
+  border: 2px solid #444;
+  color: var(--cream);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  transition: background .1s, border-color .1s;
+  -webkit-touch-callout: none;
+}
+.dpad-btn:active,
+.dpad-btn.pressed {
+  background: #2a2a4e;
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Action buttons */
+#action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.action-btn {
+  width: 70px; height: 44px;
+  background: #1a1a2e;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  transition: background .1s;
+  -webkit-touch-callout: none;
+}
+.action-btn span {
+  font-size: 5px;
+  color: #aaa;
+}
+.action-btn:active { background: #2a2a1a; }
+
+/* ── Responsive: phones & small tablets ── */
+@media (max-width: 860px) {
+
+  /* Hide desktop controls hint, show mobile D-pad */
+  #controls        { display: none; }
+  #mobile-controls { display: flex; }
+
+  /* Scale down HUD to match canvas width */
+  #hud { width: 100vw; font-size: 6px; }
+
+  /* Scale the canvas + container to fit viewport */
+  #canvas-container {
+    width:  100vw;
+    height: calc(100vw * 0.6);  /* maintain 800:480 ratio */
+    overflow: hidden;
+  }
+
+  #gameCanvas {
+    width:  100%;
+    height: 100%;
+    image-rendering: pixelated;
+  }
+
+  /* Editor panel goes full width on small screens */
+  #editor-panel {
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    height: 70vh;
+    border-left: none;
+    border-top: 2px solid var(--gold);
+  }
+
+  /* Bump up swatch size for easier tapping */
+  .color-swatch { width: 22px; height: 22px; }
+
+  /* Larger inputs on mobile */
+  .ep-input, .ep-select { font-size: 9px; padding: 6px 8px; }
+  .ep-apply { font-size: 9px; padding: 12px; }
+
+  /* Dialogue tweaks */
+  #dialogue-overlay { height: 170px; }
+  #dialogue-text    { font-size: 22px; }
+}
+
+/* ── Landscape phones ── */
+@media (max-width: 860px) and (orientation: landscape) {
+  #canvas-container {
+    width:  calc(100vh * (800/480));
+    height: 100vh;
+    max-width: 100vw;
+  }
+  #mobile-controls { padding: 6px 10px; }
+  .dpad-btn        { width: 38px; height: 38px; font-size: 14px; }
+  .action-btn      { width: 60px; height: 38px; }
+}

@@ -1,0 +1,50 @@
+/* ═══════════════════════════════════════
+   css/dialogue.css
+   Dialogue box styles
+   ═══════════════════════════════════════ */
+
+#dialogue-overlay {
+  display: none;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 155px;
+  background: linear-gradient(180deg, rgba(26,26,46,.97) 0%, #1a1a2e 100%);
+  border-top: 3px solid var(--gold);
+  padding: 12px 18px 10px;
+  z-index: 10;
+  flex-direction: column;
+  gap: 8px;
+}
+#dialogue-overlay.active { display: flex; }
+
+#dialogue-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#npc-portrait {
+  width: 40px; height: 40px;
+  border: 2px solid var(--gold);
+  background: var(--dark-bg);
+  flex-shrink: 0;
+}
+
+#npc-name     { color: var(--gold); font-size: 8px; letter-spacing: 1px; }
+#npc-subtitle { color: #888; font-size: 6px; margin-top: 2px; }
+
+#dialogue-text {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  color: var(--cream);
+  line-height: 1.5;
+  flex: 1;
+}
+
+#dialogue-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#dialogue-page     { color: #666; font-size: 6px; }
+#dialogue-continue { color: var(--gold); font-size: 7px; animation: blink 1s infinite; }

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Maplewood — A Cozy Town</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/dialogue.css" />
+  <link rel="stylesheet" href="css/editor.css" />
+  <link rel="stylesheet" href="css/mobile.css" />
+</head>
+<body>
+
+  <!-- ══ LOADING SCREEN ══ -->
+  <div id="loading">
+    <h1>🌿 Maplewood</h1>
+    <p>a cozy little town</p>
+    <div id="loading-bar"><div id="loading-fill"></div></div>
+    <p id="loading-status">gathering acorns...</p>
+  </div>
+
+  <!-- ══ GAME WRAPPER ══ -->
+  <div id="game-wrapper">
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="location-name" class="location">🌿 Maplewood Town Square</span>
+      <div id="hud-right">
+        <span class="hud-hint">walk near a character to talk</span>
+        <button id="editor-btn">✏ EDITOR</button>
+      </div>
+    </div>
+
+    <!-- CANVAS + OVERLAYS -->
+    <div id="canvas-container">
+      <canvas id="gameCanvas" width="800" height="480"></canvas>
+
+      <!-- Dialogue Box -->
+      <div id="dialogue-overlay">
+        <div id="dialogue-header">
+          <canvas id="npc-portrait" width="40" height="40"></canvas>
+          <div>
+            <div id="npc-name"></div>
+            <div id="npc-subtitle"></div>
+          </div>
+        </div>
+        <div id="dialogue-text"></div>
+        <div id="dialogue-footer">
+          <span id="dialogue-page"></span>
+          <span id="dialogue-continue">▼ TAP / SPACE</span>
+        </div>
+      </div>
+
+      <!-- Character Editor Panel -->
+      <div id="editor-panel">
+        <div class="ep-header">
+          <span class="ep-title">✏ CHARACTER EDITOR</span>
+          <button id="ep-close">✕</button>
+        </div>
+        <div class="ep-tabs">
+          <button class="ep-tab active" data-tab="player">PLAYER</button>
+          <button class="ep-tab" data-tab="npc">NPCs</button>
+        </div>
+        <div class="ep-npc-tabs" id="npc-subtabs" style="display:none;"></div>
+        <div class="ep-preview">
+          <canvas id="preview-canvas" width="80" height="100"></canvas>
+        </div>
+        <div class="ep-body" id="ep-body"></div>
+      </div>
+
+      <!-- Notification -->
+      <div id="notif"></div>
+    </div>
+
+    <!-- Desktop Controls hint -->
+    <div id="controls">
+      <span><span class="key">WASD</span> / <span class="key">ARROWS</span> Move</span>
+      <span><span class="key">SPACE</span> / <span class="key">ENTER</span> Talk</span>
+      <span><span class="key">E</span> Editor</span>
+      <span><span class="key">ESC</span> Close</span>
+    </div>
+
+    <!-- ══ MOBILE D-PAD ══ -->
+    <div id="mobile-controls">
+      <div id="dpad">
+        <button class="dpad-btn" id="btn-up"   data-dir="up">▲</button>
+        <button class="dpad-btn" id="btn-left"  data-dir="left">◀</button>
+        <button class="dpad-btn" id="btn-right" data-dir="right">▶</button>
+        <button class="dpad-btn" id="btn-down"  data-dir="down">▼</button>
+      </div>
+      <div id="action-buttons">
+        <button class="action-btn" id="btn-talk">💬<span>TALK</span></button>
+        <button class="action-btn" id="btn-editor-mobile">✏<span>EDIT</span></button>
+      </div>
+    </div>
+
+  </div><!-- /game-wrapper -->
+
+  <!-- ══ SCRIPTS (order matters) ══ -->
+  <script src="js/config.js"></script>
+  <script src="js/palettes.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/draw.js"></script>
+  <script src="js/sprites.js"></script>
+  <script src="js/dialogue.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/loading.js"></script>
+
+</body>
+</html>
